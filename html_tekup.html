@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Gestion du Département - Université Tekup</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>Gestion du Département - Université Tekup</h1>
+    <nav>
+      <ul>
+        <li><a href="#gestion-etudiants">Gestion des Étudiants</a></li>
+        <li><a href="#gestion-enseignants">Gestion des Enseignants</a></li>
+        <li><a href="#gestion-departement">Gestion du Département</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section id="gestion-etudiants">
+      <h2>Gestion des Étudiants</h2>
+       <form>
+        
+        <div>
+          <label for="nom">Nom:</label>
+          <input type="text" id="nom" placeholder="Entrez le nom"><br>
+          <label for="prenom">Prénom:</label>
+          <input type="text" id="prenom" placeholder="Entrez le prénom"><br>
+          <label for="id">Id:</label>
+          <input type="number" id="id" placeholder="Entrez l'identifiant"><br>
+          <label for="cin">Cin:</label>
+          <input type="text" id="prenom" placeholder="Entrez le cin"><br>
+          <label for="datenaiss">Datenaiss:</label>
+          <input type="Date" id="nom" placeholder="Entrez la date de naissance"><br>
+          <button onclick="ajouterEtudiant()">Ajouter</button>
+        </div>
+        <div class="etudiant-list">
+          <h2>Liste des Etudiants</h2>
+          <ul id="listeEtudiants">
+          <!-- La liste des étudiants sera affichée ici -->
+          </ul>
+  </div>
+  
+        
+
+      <script>
+        function ajouterEtudiant() {
+          // Récupérer les valeurs des champs nom et prénom
+            var nom = document.getElementById('nom').value;
+            var prenom = document.getElementById('prenom').value;
+            var id = document.getElementById('id').value;
+            var cin = document.getElementById('cin').value;
+            var datenaiss = document.getElementById('datenaiss').value;
+            
+
+
+
+          // Créer un nouvel élément li pour l'étudiant
+            var nouveauEtudiant = document.createElement('li');
+            nouveauEtudiant.textContent = nom + ' ' + prenom + ' ' + id + ' ' + cin + ' ' + datenaiss;
+
+          // Ajouter l'étudiant à la liste
+            document.getElementById('listeEtudiants').appendChild(nouveauEtudiant);
+
+          // Effacer les champs après l'ajout
+            document.getElementById('nom').value = '';
+            document.getElementById('prenom').value = '';
+            document.getElementById('id').value = '';
+            document.getElementById('cin').value = '';
+            document.getElementById('datenaiss').value = '';
+
+             // Créer un élément de liste pour afficher les détails de l'enseignant
+    const etudiantItem = document.createElement('li');
+    etudiantItem.innerHTML = `
+      <strong>ID :</strong> ${id}, 
+      <strong>Nom :</strong> ${nom}, 
+      <strong>Prénom :</strong> ${prenom}, 
+      <strong>Date de Naissance :</strong> ${dateNaiss}, 
+      <strong>Cin :</strong> ${cin}
+      <button class="delete-btn">Supprimer</button>
+    `;
+    listeEtudiants.appendChild(etudiantItem);           
+    }
+
+    // Fonction pour supprimer un étudiant
+        function supprimerEtudiant(etudiant) {
+          etudiant.parentNode.removeChild(etudiant);
+    }
+      </script>
+      </form> -->
+    </section>
+
+    <section id="gestion-enseignants">
+      <h2>Gestion des Enseignants</h2>
+      
+      
+        ... <div class="form-container">
+    <h2>Ajouter un enseignant</h2>
+    <form id="addTeacherForm">
+      <label for="id">ID :</label>
+      <input type="text" id="id" name="id" required><br>
+
+      <label for="nom">Nom :</label>
+      <input type="text" id="nom" name="nom" required><br>
+
+      <label for="prenom">Prénom :</label>
+      <input type="text" id="prenom" name="prenom" required><br>
+
+      <label for="dateNaiss">Date de naissance :</label>
+      <input type="date" id="dateNaiss" name="dateNaiss" required><br>
+
+      <label for="numEmploye">Numéro Employé :</label>
+      <input type="text" id="numEmploye" name="numEmploye" required><br>
+
+      <button type="submit">Ajouter Enseignant</button>
+    </form>
+  </div>
+
+  <!-- Liste des enseignants -->
+  <div class="teacher-list">
+    <h2>Liste des Enseignants</h2>
+    <ul id="teacherList">
+      <!-- La liste des enseignants sera ajoutée ici -->
+    </ul>
+  </div>
+
+  <script >
+    document.addEventListener('DOMContentLoaded', () => {
+  const addTeacherForm = document.getElementById('addTeacherForm');
+  const teacherList = document.getElementById('teacherList');
+
+  addTeacherForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const id = addTeacherForm.elements.id.value;
+    const nom = addTeacherForm.elements.nom.value;
+    const prenom = addTeacherForm.elements.prenom.value;
+    const dateNaiss = addTeacherForm.elements.dateNaiss.value;
+    const numEmploye = addTeacherForm.elements.numEmploye.value;
+
+    // Créer un élément de liste pour afficher les détails de l'enseignant
+    const teacherItem = document.createElement('li');
+    teacherItem.innerHTML = `
+      <strong>ID :</strong> ${id}, 
+      <strong>Nom :</strong> ${nom}, 
+      <strong>Prénom :</strong> ${prenom}, 
+      <strong>Date de Naissance :</strong> ${dateNaiss}, 
+      <strong>Numéro Employé :</strong> ${numEmploye}
+      <button class="delete-btn">Supprimer</button>
+    `;
+    teacherList.appendChild(teacherItem);
+
+    // Effacer les champs du formulaire après l'ajout de l'enseignant
+    addTeacherForm.reset();
+  });
+
+  // Supprimer un enseignant en cliquant sur le bouton "Supprimer"
+  teacherList.addEventListener('click', (e) => {
+    if (e.target.classList.contains('delete-btn')) {
+      e.target.parentElement.remove();
+    }
+  });
+});
+
+  </script>
+      </form> -->
+    </section>
+
+    <section id="gestion-departement">
+      <h1>Département d'Informatique</h1>
+    
+  </header>
+
+  <main>
+    <section id="accueil">
+      
+      <p>Bienvenue sur la page du Département Informatique de l'Université TEKUP.</p>
+      <!-- Contenu additionnel pour la section d'accueil -->
+    </section>
+
+    <section id="cours">
+      <h2>Cours</h2>
+      <p>Liste des cours offerts par le département :</p>
+      <ul>
+        <li>SOA</li>
+        <li>Spring Boot</li>
+        <li>Java Script</li>
+        <li>Design D2</li>
+        <li>Developpement Adroid</li>
+        <li>Java Script</li>
+        <li>Projet</li>
+        <!-- Ajoutez d'autres cours ici -->
+      </ul>
+    </section>
+    <section id="contact">
+      <h2>Contact</h2>
+      <p>N'hésitez pas à nous contacter :</p>
+      <address>
+        Département Informatique<br>
+        Université Tekup<br>
+        Adresse<br>
+        Email : departement-info@universite.tekup<br>
+        Téléphone : 0123456789
+      </address>
+    </section>
+        ...
+      </div> -->
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2023 Université Tekup - Gestion du Département</p>
+  </footer>
+   <script>
+    function showSection(sectionId) {
+      const sections = document.querySelectorAll('section');
+      sections.forEach(section => {
+        section.style.display = 'none';
+      });
+
+      const selectedSection = document.getElementById(sectionId);
+      if (selectedSection) {
+        selectedSection.style.display = 'block';
+      }
+    }
+  </script>
+</body>
+
+</html>
